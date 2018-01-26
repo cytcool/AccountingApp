@@ -35,12 +35,20 @@ public class RecordBean {
         this.amount = amount;
     }
 
-    public RecordType getType() {
-        return type;
+    public int getType() {
+        if (this.type == RecordType.RECORD_TYPE_EXPENSE){
+            return 1;
+        }else {
+            return 2;
+        }
     }
 
-    public void setType(RecordType type) {
-        this.type = type;
+    public void setType(int type) {
+        if (type == 1){
+            this.type = RecordType.RECORD_TYPE_EXPENSE;
+        }else {
+            this.type = RecordType.RECORD_TYPE_INCOME;
+        }
     }
 
     public String getCategory() {
