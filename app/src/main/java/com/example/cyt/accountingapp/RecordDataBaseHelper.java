@@ -68,7 +68,7 @@ public class RecordDataBaseHelper extends SQLiteOpenHelper{
         LinkedList<RecordBean> records = new LinkedList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select DISTINCE * from Record where date = ? order by time asc",new String[]{dateStr});
+        Cursor cursor = db.rawQuery("select DISTINCE " + "*" + "from" + "Record where date = " + "?" + "order by time asc",new String[]{dateStr});
 
         if (cursor.moveToFirst()){
 
@@ -104,7 +104,7 @@ public class RecordDataBaseHelper extends SQLiteOpenHelper{
         LinkedList<String> dates = new LinkedList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select DISTINCE * from Record order by date asc",new String[]{});
+        Cursor cursor = db.rawQuery("select DISTINCE" + "*" + "from" + "Record order by date asc",new String[]{});
 
         if (cursor.moveToFirst()){
 
