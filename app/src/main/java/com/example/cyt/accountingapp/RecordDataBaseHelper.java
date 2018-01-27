@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 
@@ -13,6 +14,8 @@ import java.util.LinkedList;
  */
 
 public class RecordDataBaseHelper extends SQLiteOpenHelper{
+
+    private Context mContext;
 
     public static final String DB_NAME = "Record";
 
@@ -28,11 +31,13 @@ public class RecordDataBaseHelper extends SQLiteOpenHelper{
 
     public RecordDataBaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+        mContext = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_RECORD_DB);
+        Toast toast = Toast.makeText(mContext, "Create success", Toast.LENGTH_SHORT);
     }
 
     @Override
