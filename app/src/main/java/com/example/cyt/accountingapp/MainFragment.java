@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.LinkedList;
+
 /**
  * Created by CYT on 2018/1/28.
  */
@@ -21,6 +23,10 @@ public class MainFragment extends Fragment {
     private View rootView;
     private TextView textView;
     private ListView listView;
+
+    private LinkedList<RecordBean> records = new LinkedList<>();
+
+    private ListViewAdapter listViewAdapter;
 
     private String date = "";
 
@@ -41,5 +47,12 @@ public class MainFragment extends Fragment {
         textView = rootView.findViewById(R.id.day_text);
         listView = rootView.findViewById(R.id.listView);
         textView.setText(date);
+        listViewAdapter = new ListViewAdapter(getContext());
+        listViewAdapter.setData(records);
+        listView.setAdapter(listViewAdapter);
+
+        if (listViewAdapter.getCount()>0){
+            rootView.findViewById(R.id.no_record_layout).setVisibility(View.INVISIBLE);
+        }
     }
 }
