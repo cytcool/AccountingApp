@@ -1,5 +1,6 @@
 package com.example.cyt.accountingapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
  * Created by CYT on 2018/1/28.
  */
 
+@SuppressLint("ValidFragment")
 public class MainFragment extends Fragment {
 
     private View rootView;
@@ -21,6 +23,11 @@ public class MainFragment extends Fragment {
     private ListView listView;
 
     private String date = "";
+
+    @SuppressLint("ValidFragment")
+    public MainFragment(String date){
+        this.date = date;
+    }
 
     @Nullable
     @Override
