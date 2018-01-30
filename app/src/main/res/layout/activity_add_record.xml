@@ -102,7 +102,7 @@
                        android:layout_weight="1"
                        />
                    <Button
-                       android:id="@+id/keyboard_night"
+                       android:id="@+id/keyboard_nine"
                        android:text="9"
                        android:background="@android:color/white"
                        android:layout_width="match_parent"
@@ -157,6 +157,7 @@
                android:layout_height="match_parent">
 
                <ImageButton
+                   android:id="@+id/keyboard_type"
                    android:src="@drawable/cost"
                    android:background="@android:color/white"
                    android:layout_weight="2"
@@ -164,6 +165,7 @@
                    android:layout_height="wrap_content" />
 
                <ImageButton
+                   android:id="@+id/keyboard_backspace"
                    android:src="@drawable/backspace"
                    android:background="@android:color/white"
                    android:layout_weight="1"
@@ -171,6 +173,7 @@
                    android:layout_height="wrap_content" />
 
                <ImageButton
+                   android:id="@+id/keyboard_done"
                    android:src="@drawable/done"
                    android:background="@android:color/white"
                    android:layout_weight="1"
