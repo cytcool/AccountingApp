@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class AddRecordActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,6 +25,8 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
     private ImageButton kb_backspace;
     private ImageButton kb_done;
 
+    private TextView textView;
+    private String userInput="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,8 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         kb_nine.setOnClickListener(this);
         kb_zero.setOnClickListener(this);
 
+        textView = findViewById(R.id.text_amount);
+
         handleBackSpace();
         handleDone();
         handleDot();
@@ -70,7 +75,9 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         kb_dot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (!userInput.contains(".")){
+                    userInput += ".";
+                }
             }
         });
    }
@@ -110,6 +117,34 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         Button button = (Button) v;
         String input = button.getText().toString();
 
+        if (userInput.contains(".")){
+            if (userInput.split("\\.").length ==1 || userInput.split("\\.")[1].length()==2){
+                userInput += input;
+            }
+        }else {
+            userInput += input;
+        }
+        
+        updateAmountText();
+    }
+
+    private void updateAmountText() {
+
+       if (userInput.contains(".")){
+           if (userInput.split("\\.").length == 1){
+               textView.setText(userInput + "00");
+           }else if(userInput.split("\\.")[1].length() == 1){
+               textView.setText(userInput + "0");
+           }else if (userInput.split("\\.")[1].length() == 2){
+               textView.setText(userInput);
+           }
+       }else {
+           if (userInput.equals("")){
+               textView.setText("0.00");
+           }else {
+               textView.setText(userInput + ".00");
+           }
+       }
     }
 }
 
