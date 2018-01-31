@@ -97,7 +97,12 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
        kb_backspace.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-
+                if (userInput.length()>0){
+                    userInput = userInput.substring(0,userInput.length()-1);
+                }
+                if (userInput.length()>0 && userInput.charAt(userInput.length()-1)=='.'){
+                    userInput = userInput.substring(0,userInput.length()-1);
+                }
            }
        });
    }
@@ -107,6 +112,9 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
        kb_done.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               if (!userInput.equals("")){
+                   double amount = Double.valueOf(userInput);
+               }
 
            }
        });

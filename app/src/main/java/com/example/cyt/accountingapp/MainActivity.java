@@ -1,15 +1,18 @@
 package com.example.cyt.accountingapp;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager viewPager;
     private MainViewPagerAdapter mainViewPagerAdapter;
+
+    private Button btnAddRecord;
 
 
     @Override
@@ -25,7 +28,17 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(mainViewPagerAdapter);
         viewPager.setCurrentItem(mainViewPagerAdapter.getLastIndex());
 
+        btnAddRecord = findViewById(R.id.btn_addrecord);
+        btnAddRecord.setOnClickListener(this);
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_addrecord:
+                startActivity(new Intent(this,AddRecordActivity.class));
+                break;
+        }
+    }
 }
