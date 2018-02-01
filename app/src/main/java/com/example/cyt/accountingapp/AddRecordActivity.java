@@ -2,6 +2,8 @@ package com.example.cyt.accountingapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -27,6 +29,9 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
 
     private TextView textView;
     private String userInput="";
+
+    private RecyclerView recyclerView;
+    private CategoryRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,11 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         handleDone();
         handleDot();
         handleTypeChange();
+
+        recyclerView = findViewById(R.id.recycler_view);
+        adapter = new CategoryRecyclerAdapter(getApplicationContext());
+        recyclerView.setAdapter(adapter);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),4);
 
    }
 
