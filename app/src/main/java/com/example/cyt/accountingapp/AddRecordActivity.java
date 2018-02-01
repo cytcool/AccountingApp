@@ -74,9 +74,11 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         handleTypeChange();
 
         recyclerView = findViewById(R.id.recycler_view);
-        adapter = new CategoryRecyclerAdapter(getApplicationContext());
+        adapter = new CategoryRecyclerAdapter();
         recyclerView.setAdapter(adapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),4);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        adapter.notifyDataSetChanged();
 
    }
 
