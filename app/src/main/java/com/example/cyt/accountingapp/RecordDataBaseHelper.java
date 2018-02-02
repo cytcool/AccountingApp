@@ -64,13 +64,16 @@ public class RecordDataBaseHelper extends SQLiteOpenHelper{
     }
 
     public void editRecord(String uuid,RecordBean record){
+
         removeRecord(uuid);
         record.setUuid(uuid);
         addRecord(record);
+
     }
 
     public LinkedList<RecordBean> readRecords(String dateStr){
         LinkedList<RecordBean> records = new LinkedList<>();
+
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("select DISTINCT * from Record where date ="+"?"+" order by time asc",new String[]{dateStr});

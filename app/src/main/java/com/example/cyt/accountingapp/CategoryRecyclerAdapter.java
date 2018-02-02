@@ -26,6 +26,8 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryViewHo
         return selected;
     }
 
+
+
     private String selected = "";
 
     public void setOnCategoryClickListener(OnCategoryClickListener onCategoryClickListener) {
@@ -37,7 +39,7 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryViewHo
     public CategoryRecyclerAdapter(Context context){
         this.mContext = context;
         mInfiater = LayoutInflater.from(mContext);
-        selected = cellList.get(0).title;
+       // selected = cellList.get(0).title;
     }
 
     @Override
@@ -62,6 +64,7 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryViewHo
                 if (onCategoryClickListener!=null){
                     onCategoryClickListener.onClick(res.title);
                 }
+
 
             }
         });

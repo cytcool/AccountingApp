@@ -10,9 +10,13 @@ import java.util.LinkedList;
 
 public class GlobalUtil {
 
+    private static final String TAG = "GlobalUtil";
+
     private static GlobalUtil instance;
 
-    public RecordDataBaseHelper dataBaseHelper;
+    public RecordDataBaseHelper databaseHelper;
+    private Context context;
+    public MainActivity mainActivity;
 
     public LinkedList<CategoryResBean> costRes = new LinkedList<>();
     public LinkedList<CategoryResBean> earnRes = new LinkedList<>();
@@ -41,13 +45,14 @@ public class GlobalUtil {
 
     private static String[] earnTitle = {"General","Reimburse","Salary","RedPocket","Part-time","Bonus","Investment"};
 
+
     public Context getContext() {
         return context;
     }
 
     public void setContext(Context context) {
         this.context = context;
-        dataBaseHelper = new RecordDataBaseHelper(context,RecordDataBaseHelper.DB_NAME,null,1);
+        databaseHelper = new RecordDataBaseHelper(context,RecordDataBaseHelper.DB_NAME,null,1);
 
         for(int i = 0;i<costTitle.length;i++){
             CategoryResBean res = new CategoryResBean();
@@ -64,14 +69,36 @@ public class GlobalUtil {
             res.resWhite = earnIconRes[i];
             earnRes.add(res);
         }
+
+
     }
 
-    private Context context;
+    static GlobalUtil getInstance(){
 
-    public static GlobalUtil getInstance(){
         if (instance == null){
             instance = new GlobalUtil();
         }
+
         return instance;
     }
+
+    public int getResourceIcon(String category){
+
+        for(CategoryResBean res:costRes){
+            if (res.title.equals(category)){
+                return res.resWhite;
+            }
+        }
+
+        for(CategoryResBean res:earnRes){
+            if (res.title.equals(category)){
+                return res.resWhite;
+            }
+        }
+
+        return costRes.get(0).resWhite;
+    }
+
+
+
 }
