@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity  {
 
     private ViewPager viewPager;
     private MainViewPagerAdapter mainViewPagerAdapter;
@@ -28,17 +28,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPager.setAdapter(mainViewPagerAdapter);
         viewPager.setCurrentItem(mainViewPagerAdapter.getLastIndex());
 
-        btnAddRecord = findViewById(R.id.btn_addrecord);
-        btnAddRecord.setOnClickListener(this);
+        findViewById(R.id.btn_addrecord).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,AddRecordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_addrecord:
-                startActivity(new Intent(this,AddRecordActivity.class));
-                break;
-        }
-    }
+
 }
