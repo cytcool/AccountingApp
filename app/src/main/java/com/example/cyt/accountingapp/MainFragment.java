@@ -33,6 +33,7 @@ public class MainFragment extends Fragment {
     @SuppressLint("ValidFragment")
     public MainFragment(String date){
         this.date = date;
+        records = GlobalUtil.getInstance().databaseHelper.readRecords(date);
     }
 
     @Nullable

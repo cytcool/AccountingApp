@@ -23,9 +23,7 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter{
 
     private void initFragments(){
 
-        dates.add("2018-1-27");
-        dates.add("2018-1-28");
-        dates.add("2018-1-29");
+        dates = GlobalUtil.getInstance().databaseHelper.getAvaliableDate();
 
         for (String date:dates) {
             MainFragment fragment = new MainFragment(date);
