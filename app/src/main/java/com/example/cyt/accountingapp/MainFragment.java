@@ -1,13 +1,16 @@
 package com.example.cyt.accountingapp;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,7 +21,7 @@ import java.util.LinkedList;
  */
 
 @SuppressLint("ValidFragment")
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements AdapterView.OnItemLongClickListener {
 
     private View rootView;
     private TextView textView;
@@ -53,6 +56,8 @@ public class MainFragment extends Fragment {
         listView.setAdapter(listViewAdapter);
         textView.setText(DateUtil.getDateTitle(date));
 
+        listView.setOnItemLongClickListener(this);
+
     }
 
     public void reload() {
@@ -73,5 +78,28 @@ public class MainFragment extends Fragment {
             }
         }
         return (int)amount;
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        showDialog(position);
+        return false;
+    }
+
+    private void showDialog(int index){
+        final String[] options = {"Remove","Edit"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.create();
+
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        builder.setNegativeButton("Cancel",null);
+        builder.create().show();
     }
 }
