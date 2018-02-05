@@ -49,8 +49,15 @@ public class MainFragment extends Fragment {
         listView = rootView.findViewById(R.id.listView);
         textView.setText(date);
         listViewAdapter = new ListViewAdapter(getContext());
-        listViewAdapter.setData(records);
+        reload();
         listView.setAdapter(listViewAdapter);
+
+
+    }
+
+    public void reload() {
+        records = GlobalUtil.getInstance().databaseHelper.readRecords(date);
+        listViewAdapter.setData(records);
 
         if (listViewAdapter.getCount()>0){
             rootView.findViewById(R.id.no_record_layout).setVisibility(View.INVISIBLE);

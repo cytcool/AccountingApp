@@ -78,6 +78,17 @@ class ViewHolder{
         amountTV = itemView.findViewById(R.id.tv_amount);
         categoryIcon = itemView.findViewById(R.id.imageview_category);
 
+        remarkTV.setText(record.getRemark());
+
+        if (record.getType() == 1){
+            amountTV.setText(" -"+record.getAmount());
+        }else {
+            amountTV.setText(" +"+record.getAmount());
+        }
+
+        timeTV.setText(DateUtil.getFormattedTime(record.getTimeStamp()));
+        categoryIcon.setImageResource(GlobalUtil.getInstance().getResourceIcon(record.getCategory()));
+
 
 
     }

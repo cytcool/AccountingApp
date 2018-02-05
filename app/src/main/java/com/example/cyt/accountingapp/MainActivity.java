@@ -34,11 +34,14 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,AddRecordActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
     }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mainViewPagerAdapter.reload();
+    }
 }

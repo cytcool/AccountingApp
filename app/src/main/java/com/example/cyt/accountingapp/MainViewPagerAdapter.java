@@ -25,6 +25,10 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter{
 
         dates = GlobalUtil.getInstance().databaseHelper.getAvaliableDate();
 
+        if (!dates.contains(DateUtil.getFormattedDate())){
+            dates.addLast(DateUtil.getFormattedDate());
+        }
+
         for (String date:dates) {
             MainFragment fragment = new MainFragment(date);
             fragments.add(fragment);
@@ -43,5 +47,11 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter{
     @Override
     public int getCount() {
         return fragments.size();
+    }
+
+    public void reload() {
+        for (MainFragment fragment:fragments) {
+            fragment.reload();
+        }
     }
 }

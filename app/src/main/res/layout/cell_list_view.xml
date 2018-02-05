@@ -7,6 +7,8 @@
 
     <ImageView
         android:id="@+id/imageview_category"
+        android:padding="8dp"
+        android:src="@drawable/icon_appstore"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
