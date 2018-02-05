@@ -90,11 +90,22 @@ public class MainFragment extends Fragment implements AdapterView.OnItemLongClic
         final String[] options = {"Remove","Edit"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
+        final RecordBean selectedRecord = records.get(index);
+
         builder.create();
 
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // which = 0 -> Remove
+                // which = 1 -> Edit
+                if (which == 0){
+                    String uuid = selectedRecord.getUuid();
+                    GlobalUtil.getInstance().databaseHelper.removeRecord(uuid);
+                    reload();
+                }else if(which == 1){
+
+                }
 
             }
         });
