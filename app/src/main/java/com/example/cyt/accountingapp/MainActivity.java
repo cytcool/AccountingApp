@@ -6,17 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity  {
+import com.robinhood.ticker.TickerUtils;
+import com.robinhood.ticker.TickerView;
+
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     private ViewPager viewPager;
     private MainViewPagerAdapter mainViewPagerAdapter;
 
-    private Button btnAddRecord;
-
-
-
-
+    private TickerView amountText;
+    private TextView dateText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +25,15 @@ public class MainActivity extends AppCompatActivity  {
 
         getSupportActionBar().setElevation(0);
 
+        amountText = findViewById(R.id.amount_text);
+        amountText.setCharacterList(TickerUtils.getDefaultNumberList());
+        dateText = findViewById(R.id.day_text);
+
         viewPager = findViewById(R.id.viewpager);
         mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
         mainViewPagerAdapter.notifyDataSetChanged();
         viewPager.setAdapter(mainViewPagerAdapter);
+        viewPager.setOnPageChangeListener(this);
         viewPager.setCurrentItem(mainViewPagerAdapter.getLastIndex());
 
         findViewById(R.id.btn_addrecord).setOnClickListener(new View.OnClickListener() {
@@ -37,11 +43,31 @@ public class MainActivity extends AppCompatActivity  {
                 startActivityForResult(intent,1);
             }
         });
+
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mainViewPagerAdapter.reload();
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+            String amount = String.valueOf(mainViewPagerAdapter.getTotalCost(position)) + " ";
+            amountText.setText(amount);
+            String date = mainViewPagerAdapter.getDateStr(position);
+            dateText.setText(DateUtil.getWeekDay(date));
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }
