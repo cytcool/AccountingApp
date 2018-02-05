@@ -11,13 +11,15 @@ import java.util.Date;
 
 public class DateUtil {
 
+    //unix time -> 11:11
     public static String getFormattedTime(long timeStamp){
-
+        //yyyy-MM-dd HH:mm:ss
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
         return formatter.format(new Date(timeStamp));
 
     }
 
+    //2017-06-15
     public static String getFormattedDate(){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         return formatter.format(new Date());
@@ -45,8 +47,8 @@ public class DateUtil {
         String[] months = {"January","February","March","April","May","June","July","August","September","October","November","December"};
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(strToDate(date));
-        int monthindex = calendar.get(Calendar.MONTH);
+        int monthIndex = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        return months[monthindex] + " " + String.valueOf(day);
+        return months[monthIndex] + " " + String.valueOf(day); //2017-06-15 -> June 15
     }
 }

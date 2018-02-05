@@ -76,6 +76,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
         }
 
 
+
     }
 
     private void handleDot(){
@@ -101,6 +102,7 @@ public class AddRecordActivity extends AppCompatActivity implements View.OnClick
                 }else {
                     type = RecordBean.RecordType.RECORD_TYPE_EXPENSE;
                 }
+
 
                 adapter.changeType(type);
                 category = adapter.getSelected();

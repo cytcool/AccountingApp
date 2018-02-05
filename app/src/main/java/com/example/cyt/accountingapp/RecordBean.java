@@ -1,12 +1,15 @@
 package com.example.cyt.accountingapp;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  * Created by CYT on 2018/1/26.
  */
 
-public class RecordBean {
+public class RecordBean implements Serializable{
+
+    private static String TAG = "RecordBean";
 
     public enum RecordType{
         RECORD_TYPE_EXPENSE,RECORD_TYPE_INCOME
@@ -16,9 +19,10 @@ public class RecordBean {
     private RecordType type;
     private String category;
     private String remark;
-    private String date;
-    private long timeStamp;
 
+    private String date; //2017-06-15
+
+    private long timeStamp;
     private String uuid;
 
     public RecordBean(){
@@ -36,11 +40,13 @@ public class RecordBean {
     }
 
     public int getType() {
+
         if (this.type == RecordType.RECORD_TYPE_EXPENSE){
             return 1;
         }else {
             return 2;
         }
+
     }
 
     public void setType(int type) {
@@ -49,6 +55,7 @@ public class RecordBean {
         }else {
             this.type = RecordType.RECORD_TYPE_INCOME;
         }
+
     }
 
     public String getCategory() {
@@ -93,3 +100,4 @@ public class RecordBean {
 
 
 }
+

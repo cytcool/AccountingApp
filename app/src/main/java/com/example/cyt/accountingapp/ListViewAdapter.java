@@ -15,16 +15,16 @@ import java.util.LinkedList;
  * Created by CYT on 2018/1/29.
  */
 
-public class ListViewAdapter extends BaseAdapter {
+public class ListViewAdapter  extends BaseAdapter {
 
-    LinkedList<RecordBean> records = new LinkedList<>();
+    private LinkedList<RecordBean> records = new LinkedList<>();
 
-    private LayoutInflater layoutInflater;
+    private LayoutInflater mInflater;
     private Context mContext;
 
-    public ListViewAdapter(Context mContext){
-        this.mContext = mContext;
-        layoutInflater = LayoutInflater.from(mContext);
+    public ListViewAdapter(Context context){
+        this.mContext = context;
+        mInflater = LayoutInflater.from(mContext);
     }
 
     public void setData(LinkedList<RecordBean> records){
@@ -38,59 +38,62 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return records.get(position);
+    public Object getItem(int i) {
+        return records.get(i);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(int i) {
+        return i;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int i, View view, ViewGroup viewGroup) {
 
-        ViewHolder viewHolder;
-        if (convertView == null){
-            convertView = layoutInflater.inflate(R.layout.cell_list_view,parent,false);
+        ViewHolder holder;
 
-            RecordBean recordBean = (RecordBean) getItem(position);
-            viewHolder = new ViewHolder(convertView,recordBean);
-            convertView.setTag(viewHolder);
+        if (view == null){
+            view = mInflater.inflate(R.layout.cell_list_view,null);
+
+            RecordBean recordBean = (RecordBean) getItem(i);
+            holder = new ViewHolder(view,recordBean);
+
+            view.setTag(holder);
+
         }else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) view.getTag();
         }
 
-        return convertView;
+        return view;
     }
 }
 
 class ViewHolder{
 
+
     TextView remarkTV;
-    TextView timeTV;
     TextView amountTV;
+    TextView timeTV;
     ImageView categoryIcon;
 
-    public ViewHolder(View itemView,RecordBean record){
-        remarkTV = itemView.findViewById(R.id.tv_remark);
-        timeTV = itemView.findViewById(R.id.tv_time);
-        amountTV = itemView.findViewById(R.id.tv_amount);
-        categoryIcon = itemView.findViewById(R.id.imageview_category);
+
+    public ViewHolder(View itemView, RecordBean record){
+        remarkTV = (TextView) itemView.findViewById(R.id.tv_remark);
+        amountTV = (TextView) itemView.findViewById(R.id.tv_amount);
+        timeTV = (TextView) itemView.findViewById(R.id.tv_time);
+        categoryIcon = (ImageView) itemView.findViewById(R.id.imageView_category);
 
         remarkTV.setText(record.getRemark());
 
         if (record.getType() == 1){
-            amountTV.setText(" -"+record.getAmount());
+            amountTV.setText("- " + record.getAmount());
         }else {
-            amountTV.setText(" +"+record.getAmount());
+            amountTV.setText("+ " + record.getAmount());
         }
 
         timeTV.setText(DateUtil.getFormattedTime(record.getTimeStamp()));
+
         categoryIcon.setImageResource(GlobalUtil.getInstance().getResourceIcon(record.getCategory()));
-
-
-
     }
 
 

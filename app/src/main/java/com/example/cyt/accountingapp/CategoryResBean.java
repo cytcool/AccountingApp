@@ -10,5 +10,4 @@ public class CategoryResBean {
     int resBlack;
     int resWhite;
 
-
 }

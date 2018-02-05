@@ -10,11 +10,10 @@ import java.util.LinkedList;
  * Created by CYT on 2018/1/29.
  */
 
-public class MainViewPagerAdapter extends FragmentPagerAdapter{
+public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
     LinkedList<MainFragment> fragments = new LinkedList<>();
     LinkedList<String> dates = new LinkedList<>();
-
 
     public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -29,10 +28,19 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter{
             dates.addLast(DateUtil.getFormattedDate());
         }
 
-        for (String date:dates) {
+        for (String date:dates){
             MainFragment fragment = new MainFragment(date);
             fragments.add(fragment);
         }
+
+
+    }
+
+    public void reload(){
+        for (MainFragment fragment : fragments){
+            fragment.reload();
+        }
+
     }
 
     public int getLastIndex(){
@@ -49,17 +57,12 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter{
         return fragments.size();
     }
 
-    public void reload() {
-        for (MainFragment fragment:fragments) {
-            fragment.reload();
-        }
-    }
-
-    public int getTotalCost(int index){
-        return fragments.get(index).getToatlCost();
-    }
-
     public String getDateStr(int index){
         return dates.get(index);
     }
+
+    public int getTotalCost(int index){
+        return fragments.get(index).getTotalCost();
+    }
 }
+
