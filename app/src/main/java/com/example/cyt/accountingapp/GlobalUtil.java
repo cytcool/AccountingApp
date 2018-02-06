@@ -76,7 +76,9 @@ public class GlobalUtil {
     static GlobalUtil getInstance(){
 
         if (instance == null){
-            instance = new GlobalUtil();
+            if (instance == null){
+                instance = new GlobalUtil();
+            }
         }
 
         return instance;
